@@ -1,0 +1,1 @@
+# alpine-hardened-docker-compose
