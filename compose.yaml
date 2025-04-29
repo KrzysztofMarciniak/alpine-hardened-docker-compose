@@ -1,0 +1,30 @@
+services:
+  alpine_hardened:
+    image: alpine:latest
+    container_name: alpine_hardened
+    restart: no
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    logging:
+      driver: "none"
+    stdin_open: false
+    tty: false
+    user: "1000:1000"
+    environment:
+      HISTFILE: /dev/null
+    command: ["/bin/sh"]
+    ulimits:
+      nproc:  500
+      nofile: 1024
+    mem_limit: 128m
+    cpus: 0.5
+    networks:
+      - isolated_net
+networks:
+  isolated_net:
+    driver: bridge
